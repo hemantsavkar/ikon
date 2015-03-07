@@ -1,0 +1,105 @@
+/*
+ * http://docs.angularjs.org/api/ng/directive/ngShow#usage_animations
+ */
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+<ion-view view-title="My Bookings">
+    <ion-content padding="true">
+        <div class="button-bar">
+          <ion-radio ng-repeat="item in historyOptions"
+                       ng-value="item.id"
+                       ng-model="history.historyType"
+                       ng-change="historyTypeChange(item)" style="width:50%;" 
+                       name="bookingType">
+                        {{ item.name }}
+            </ion-radio>
+      </div>
+        
+      
+        <ion-list style="margin:2px">
+            <div ng-repeat="booking in bookings">
+              <ion-item class="item-stable item-icon-left item-icon-right"
+                        ng-click="toggleGroup(booking)"
+                        ng-class="{active: isGroupShown(booking)}">
+                  <i class="icon ion-ios-alarm-outline"></i>
+                  <i class="icon" ng-class="isGroupShown(booking) ? 'ion-ios-arrow-down' : 'ion-ios-arrow-right'"></i>
+                  {{booking.time}} &nbsp;&nbsp;&nbsp;&nbsp;{{booking.date|date:'dd MMM yyyy'}}
+                  
+              </ion-item>
+              <ion-item class="item-accordion"
+                        ng-show="isGroupShown(booking)">
+                <div class="row">
+                <div class="col col-50">
+                    <div class="row">
+                        <div class="col col-50">
+                            <b>From:</b>
+                        </div>
+                         <div class="col col-50">
+                            {{booking.from}}
+                        </div>
+                    </div>
+                  <div class="row">
+                        <div class="col col-50">
+                            <b>To:</b>
+                        </div>
+                         <div class="col col-50">
+                            {{booking.to}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-50">
+                  <div class="row">
+                        <div class="col col-50">
+                            <b>Date:</b>
+                        </div>
+                         <div class="col col-50">
+                            {{booking.date|date:'dd MMM yyyy'}}
+                        </div>
+                    </div>
+                  <div class="row">
+                        <div class="col col-50">
+                            <b>Time:</b>
+                        </div>
+                         <div class="col col-50">
+                            {{booking.time}}
+                        </div>
+                    </div>
+                </div>
+              </ion-item>
+            </div>
+            <div class="row" ng-show="history.historyType!='1'">
+                <div class="col">
+                    <button class="button button-light button-block">
+                        <i class="icon ion-ios-mic-outline"></i><br/>
+                    </button>
+                </div>
+                <div class="col">
+                   <button class="button button-light button-block">
+                        <i class="icon ion-ios-bookmarks-outline"></i><br/>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="button button-light button-block">
+                        <i class="icon ion-ios-list-outline"></i><br/>
+                    </button>
+                </div>
+            </div>
+                </div> 
+            
+      </ion-list>
+        
+        
+    </ion-content>
+</ion-view>

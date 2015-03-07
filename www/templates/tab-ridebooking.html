@@ -1,0 +1,46 @@
+<ion-view view-title="Book A Ride">
+  <ion-content class="padding">
+    
+      <div class="button-bar">
+      <ion-radio ng-repeat="item in journeyTypes"
+                   ng-value="item.value"
+                   ng-model="trip.journeyType"
+                   ng-change="serverSideChange(item)" style="width:50%;margin:5px" 
+                   name="journeyType">
+          {{ item.text }}
+        </ion-radio>
+      </div>
+      
+      <div class="list card">
+          <!--<a href="#" class="item item-icon-left item-icon-right" ng-click="getSource()">-->
+          <a href="#/tab/locations/1" class="item item-icon-left item-icon-right">
+              <i class="icon ion-home"></i>
+              {{source.name}}
+              <i class="icon ion-chevron-right"></i>
+          </a>
+        <!--<a href="#" class="item item-icon-left item-icon-right" ng-click="getDestination()">-->
+          <a href="#/tab/locations/2" class="item item-icon-left item-icon-right">
+             <i class="icon ion-flag"></i>
+              {{destination.name}}
+              <i class="icon ion-chevron-right"></i>
+          </a>
+          
+        </div>
+      <div ng-click="selectDaprtDate()">
+          <a href="#" class="item item-icon-right">
+              <i class="icon ion-calendar"></i>
+               {{departuredate}}
+          </a>
+     </div>
+      <div ng-click="selectRaturmDate()"  ng-hide="trip.journeyType=='oneway'" >
+          <a href="#" class="item item-icon-right">
+              <i class="icon ion-calendar"></i>
+               {{returndate}}
+          </a>
+     </div>
+      
+            <button class="button button-positive button-block" ng-disabled="!isBookable()">Book</button>
+            <button class="button button-positive button-block" ng-click="reset()">Reset</button>
+    
+    </ion-content>
+</ion-view>
